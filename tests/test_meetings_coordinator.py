@@ -6,7 +6,6 @@ from meetings_coordinator.meetings_coordinator import get_available_time_slots
 
 
 @pytest.mark.parametrize('calendars,time_slots', [
-    ([], []),
     (
         [
             {

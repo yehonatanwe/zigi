@@ -18,6 +18,9 @@ class Meeting(BaseModel):
     end_time: datetime = Field(default_factory=datetime.fromisocalendar, alias='endTime')
     subject: str
 
+    def __lt__(self, other: "Meeting") -> bool:
+        return self.start_time < other.start_time
+
 
 class Calendar(BaseModel):
     name: str
@@ -41,10 +44,10 @@ def get_available_time_slots(calendars_list: list) -> list:
     time_slots = []
     calendars = [Calendar(**calendar_dict) for calendar_dict in calendars_list]
     logger.info("Sorting calenders by min start_time")
-    meetings = sorted([m for c in calendars for m in c.meetings], key=lambda x: x.start_time)
+    meetings = sorted([m for c in calendars for m in c.meetings])
 
     if not meetings:
-        return time_slots
+        raise Exception("No meetings were provided")
 
     min_meeting = meetings[0]
     max_end_time = min_meeting.end_time
