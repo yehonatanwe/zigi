@@ -19,28 +19,26 @@ def product_list(array: List[int]) -> List[int]:
     # each cell i holds the product of array[:i - 1], except for i == 0
     for i in range(length - 1):
         left.append(array[i] * left[i])
-        print(f'left: {left}')
 
     # each cell i holds the product of array[i + 1:], except for i == length - 1
     for i in range(length - 1, 0, -1):
         right[i - 1] = array[i] * right[i]
-        print(f'right: {right}')
 
     # each cell i holds the product of array[:i - 1] * array[i + 1:] == reduce(lambda x, y: x * y, array) / array[i]
     for i in range(length):
         product.append(left[i] * right[i])
-        print(f'product: {product}')
 
     return product
 
 
 def parse_arguments() -> Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument('-a', '--array', type=list, dest='array')
+    parser.add_argument('-a', '--array', nargs='+', type=int, dest='array')
     return parser.parse_args()
 
 
 def main(args: Namespace) -> None:
+    print(args.array)
     print(product_list(array=args.array))
 
 
