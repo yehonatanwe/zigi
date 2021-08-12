@@ -78,7 +78,7 @@ def get_available_time_slots(calendars_list: list) -> list:
     return [ts.dict(by_alias=True) for ts in time_slots]
 
 
-def parse_arguments():
+def parse_arguments() -> Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--calendars', type=json.loads, dest='calendars')
     parser.add_argument('-f', '--file', type=str, dest='file')

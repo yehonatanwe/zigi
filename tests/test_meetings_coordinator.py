@@ -2,10 +2,10 @@ from unittest import TestCase
 
 import pytest
 
-from meetings_coordinator.meetings_coordinator import get_available_time_slots
+from src.meetings_coordinator import get_available_time_slots
 
 
-@pytest.mark.parametrize('calendars,time_slots', [
+@pytest.mark.parametrize(argnames=['calendars', 'time_slots'], argvalues=[
     (
         [
             {
